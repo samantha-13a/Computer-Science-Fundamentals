@@ -1,0 +1,63 @@
+SHORT ANSWER
+
+1. Why do programmers use pseudocode?
+
+It helps them flesh out their code before they write it in a formal computer language. It is also helpful to describe concepts to other programmers using pseudocode, that way all the programmers can understand the concept, even if they do not all know the same computer languages. It keeps things universal and accessible.
+
+
+2. If you run pseudocode on your computer, what would happen?
+
+Nothing. Pseudocode is not meant to be read by a computer. It is an informal high-level description of the operating principle of a computer program or other algorithm; an informal language that is meant for humans to read rather than computers.
+
+
+
+PROGRAMMING ASSIGNMENT
+
+Create the following algorithms in pseudocode:
+
+1. Create a function that takes two numbers and prints out the greater number.
+
+INPUT first number
+INPUT second number
+IF first number is larger than second number
+  PRINT first number  
+ELSE
+  PRINT second number
+END IF
+
+
+2. Create a function that prints out the numbers from 1 to 100.
+
+INIT total to 1
+INPUT 100
+WHILE the total is smaller than or equal to 100
+  PRINT number
+END WHILE
+
+
+3. Create a function that searches for a specific entry in a phonebook.
+
+VAR ARRAY = [["name", number], ["name", number], ["name", number]...]
+
+FUNCTION searchPhonebook(name)
+  DECLARE i as empty string
+    SET i to ''
+  FOR every ENTRY in ARRAY
+  IF ENTRY[0] matches NAME
+    PRINT NUMBER
+END FUNCTION
+
+// Call function with desired name
+
+
+4. Using pseudocode you wrote for the previous question, implement it in any computer language in your choice.
+
+var phonebook = [["Samantha A", "401-555-1031"], ["Joey B", "401-555-1337"], ["Mia C", "401-555-4711"], ["Kayla D", "401-555-7689"], ["Matthew D", "401-555-0123"]]
+
+function searchPhonebook(name) {
+  for (let i = 0, i < phonebook.length, i++) {
+    if (name == phonebook[i][0]) {
+      return phonebook[i][1];
+    };
+  };
+}

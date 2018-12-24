@@ -2,12 +2,15 @@ SHORT ANSWER
 
 1. Why do programmers use pseudocode?
 
-It helps them flesh out their code before they write it in a formal computer language. It is also helpful to describe concepts to other programmers using pseudocode, that way all the programmers can understand the concept, even if they do not all know the same computer languages. It keeps things universal and accessible.
+It helps them flesh out their code before they write it in a formal computer language. It is also helpful to describe concepts 
+to other programmers using pseudocode, that way all the programmers can understand the concept, even if they do not all know 
+the same computer languages. It keeps things universal and accessible.
 
 
 2. If you run pseudocode on your computer, what would happen?
 
-Nothing. Pseudocode is not meant to be read by a computer. It is an informal high-level description of the operating principle of a computer program or other algorithm; an informal language that is meant for humans to read rather than computers.
+Nothing. Pseudocode is not meant to be read by a computer. It is an informal high-level description of the operating principle 
+of a computer program or other algorithm; an informal language that is meant for humans to read rather than computers.
 
 
 

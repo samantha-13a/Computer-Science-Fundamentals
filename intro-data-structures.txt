@@ -1,0 +1,64 @@
+1. A line of people at an amusement park ride.
+
+- The line is composed of members, represented as strings.
+- There is a front to the line, as well as a back.
+- When someone enters the line, place them at the end.
+- People may leave the line whenever they see fit, and those behind them take their place.
+- Given the above real-world information, use an array data structure to code the following 
+solution.
+
+a) Use an array input: ["Vivian", "Ava", "Josh", "Patrick", "Mike"]
+
+var rideLine = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+
+
+b) Insert a new person, "Mary" at the end of the line. In other words, you should insert Mary 
+after Mike.
+
+var rideLine = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+rideLine.push("Mary");
+console.log(rideLine);
+
+
+c) Find a person in line named "Josh." This function should return the position of 2 in the array,
+ (recall that arrays are 0-based).
+
+var rideLine = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+const findJosh = rideLine.findIndex(rideLine => rideLine === "Josh");
+console.log(findJosh);
+// Output: 2
+
+
+d) Find a person in line named "Emily." What should your function return if it does not find the 
+item in the array?
+
+var rideLine = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+const findEmily = rideLine.findIndex(rideLine => rideLine === "Emily");
+console.log(findEmily);
+// Output: -1
+
+
+e) What if Ava wants to allow a friend, "Melissa", to cut in line in front of her? How would you 
+code this so Melissa appears before Ava?
+
+var rideLine = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+rideLine.splice(1, 0, "Melissa");
+
+
+f) If Patrick wants to leave the line, how would you delete him from the array?
+
+var rideLine = ["Vivian", "Ava", "Josh", "Patrick", "Mike"];
+rideLine.splice(3, 1);
+console.log(rideLine);
+
+
+2. Provide another real-world example that you can model using a data structure.
+
+Family history, ancestry, and DNA kits are all the rage right now. On most of the websites and 
+applications for these services, you are able to track your family in a family tree. This, 
+fittingly, is an example of the data structure called a tree.
+
+
+3. How would your data structure allow developers to access and manipulate the data?
+
+If we're talking about a physical family tree, you can draw lines on paper and move names around. Online, users can do the same thing, just virtually. A programmer could access and manipulate the data within the application by just going in and changing some code around to change placements and chains or edit names.

@@ -129,13 +129,14 @@ END FUNCTION
 REFACTORED:
 
 FUNCTION checkoutBook(book, guest)
-  IF guest.accountActive THEN
-    APPEND book to guest.books
-    SET book.status to "Checked Out"
-      PRINT "Your books have been issued."
-  ELSE IF guest.hasOverdueBooks 
-    OR guest.outstandingFees != 0 THEN
-      PRINT "Unable to check out book."
+  IF guest.accountActive 
+    AND guest.hasOverdueBooks = FALSE 
+    AND guest.outstandingFees = 0 THEN
+      APPEND book to guest.books
+      SET book.status to "Checked Out"
+        PRINT "Your books have been issued."
+  ELSE 
+    PRINT "Unable to check out book."
   END IF
 END FUNCTION 
 
@@ -234,7 +235,7 @@ The square root of 2 is approximately 1.414213562373095.
 
 function squared(array) {
   let sum = 0;
-  for (let i = 0, i <= array; i++) {
+  for (let i = 0; i <= array; i++) {
     sum += i;
   }
   const squareRoot = Math.sqrt(sum);

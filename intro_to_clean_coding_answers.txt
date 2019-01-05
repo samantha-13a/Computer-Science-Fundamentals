@@ -234,13 +234,10 @@ Example:
 The square root of 2 is approximately 1.414213562373095.
 
 function squared(array) {
-  let sum = 0;
-  for (let i = 0; i <= array; i++) {
-    sum += i;
-  }
+  let sum = array.reduce((total, value) => total + value, 0);
   const squareRoot = Math.sqrt(sum);
-  if (squareRoot % === 0) {
-    return squareRoot
+  if (sum % squareRoot === 0) {
+    return squareRoot;
   }
   return sum;
 }

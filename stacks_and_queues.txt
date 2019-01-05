@@ -1,0 +1,124 @@
+EXERCISES
+
+1. What is the main difference between a stack and a queue?
+
+Stacks arrange elements in accordance with LIFO (last in, first out) priority, while queues arrange elements in accordance with FIFO (first in, first out) priority.
+
+
+
+2. What are the similarities between stacks and queues?
+
+They are both non-primitive data structures, and they are both linear data structures and store information sequentially. 
+
+
+
+3. Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
+
+For the Undo option I would use a stack, employing LIFO priority, because with an Undo option, we are working backwards. The last change I made is the first one I want to delete, and going on from there. When you're redoing something, technically that's a last out, first in process. But I believe a queue would suffice.
+
+
+
+
+
+PROGRAMMING QUESTIONS
+
+Before you begin coding, write out a plan as to how you will solve the question.
+
+
+
+1. Given a string, reverse it using a stack. For example, the string "Bloc!" should be converted to "!colB".
+
+To solve the question, I will use the pseudocode provided in one of the examples in the checkpoint:
+
+---
+FUNCTION REVERSE(original)
+  INIT a new stack
+  FOR each character in original
+    CALL stack.push WITH character
+  END FOR
+  INIT reversed to empty string
+  WHILE stack is not empty
+    CALL stack.pop RETURNING character
+    APPEND character to reversed
+  END WHILE
+  RETURN reversed
+END FUNCTION
+
+reverse("Bloc!")
+#=> "!colB"
+---
+
+And now, I will translate that pseudocode into JavaScript.
+
+function reverse(string) {
+  let stack = [];
+  for (let i = 0; i < string.length; i++) {
+    stack.push(string[i]);
+  }
+  var reversed = "";
+  while (stack.length > 0) {
+    reversed = reversed + stack.pop();
+  }
+  return reversed;
+}
+
+console.log(reverse("Bloc!"));
+
+
+
+
+
+2. Implement the pop method of a stack using one queue. Make a FIFO data structure mirror the functionality of a LIFO data structure.
+
+To do this I will first look at the example pseudocode given in the checkpoint that pertains to this problem:
+
+---
+FUNCTION pop
+  SET the element at the stack position index to temp
+  DECREMENT the stack position index by 1
+  RETURN temp
+END FUNCTION
+---
+
+const myQueue = ["Rebecca", "Valencia", "Josh", "Nathaniel", "Trent"];
+
+function mimic(array) {
+  var newQueue = array.shift();
+  return array;
+}
+
+
+
+
+
+3. Implement the enqueue and dequeue methods defined in the checkpoint inside your own Queue class.
+
+First I will create a class as described in previous checkpoints, and then I will use the pseudocode given in the checkpoint to create the dequeue and enqueue methods. 
+
+---
+FUNCTION enqueue(element)
+  APPEND element to the end of the list
+END FUNCTION
+
+FUNCTION dequeue
+  SET temp to the first element
+  REMOVE FIRST element of list from list
+  RETURN temp
+END FUNCTION
+---
+
+class Queue {
+  constructor() {
+    this.queue = [];
+  }
+
+  enqueue(element) {
+    this.queue.push(element);
+  }
+
+  dequeue() {
+    var temp = this.queue[0];
+    this.queue.shift(element);
+    return temp;
+  }
+}

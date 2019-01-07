@@ -14,7 +14,7 @@ They are both non-primitive data structures, and they are both linear data struc
 
 3. Imagine you are an engineer tasked with implementing the UNDO and REDO options in a word processor such as Microsoft Word. Which data structure would you use for each option and why?
 
-For the Undo option I would use a stack, employing LIFO priority, because with an Undo option, we are working backwards. The last change I made is the first one I want to delete, and going on from there. When you're redoing something, technically that's a last out, first in process. But I believe a queue would suffice.
+For the Undo option I would use a stack, employing LIFO priority, because with an Undo option, we are working backwards. The last change I made is the first one I want to delete, and going on from there. When you're redoing something, you would also use a stack, because the last thing you deleted is the first thing that you want to put back in.
 
 
 

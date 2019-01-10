@@ -1,0 +1,292 @@
+EXERCISES
+
+1. What is a hash table?
+
+A hash table can also be referred to as a hash data structure, and it is a data structure that implements an associative 
+array abstract data type, a structure that can map keys to values. A hash table uses a hash function to compute an index 
+into an array of buckets or slots, from which the desired value can be found.
+
+
+
+
+
+2. What is hashing?
+
+Hashing is a process of converting arbitrary data into a fixed-length hash code using a hashing function. A hash function 
+is any function that can be used to map data of arbitrary size to data of a fixed size. The values returned by a hash 
+function are called hash values, hash codes, digests, or simply hashes.
+
+
+
+
+
+3. How does a hash table store data?
+
+A hash table stores data by  linking it to a key, forming key-value pairs, just like JavaScript objects. Each key must be 
+unique in a hash table; therefore, a value can be retrieved by looking up its distinct key. Hash tables store these 
+key-value pairs by placing them at a particular location in an array maintained internally in the hash table.
+
+
+
+
+
+4. How are hash tables and objects different?
+
+Hash tables, like arrays, are intended to be used as collections of similar data. They are commonly used to store data 
+by some form of identifier. Objects hold potentially different types of data bundled together.
+
+
+
+
+
+5. Determine whether you would use a hash table or an object to store each of the following pieces of data:
+
+- A list of pets and their unique names: HASH TABLE 
+- The name, age, and the birthday of your best friend: OBJECT
+- The name and location of every company in a given city: HASH TABLE 
+- All of the books checked out from a library by a particular individual: HASH TABLE 
+- The primary and secondary phone numbers for a contact: OBJECT 
+
+
+
+
+
+6. Build a system that allows a sales associate to enter a customer's name, address, and phone number into the system 
+and look up customers using their phone numbers. Store this information in a hash table.
+
+var hash = (string, max) => {
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % max;
+};
+
+class HashTable {
+  constructor(phoneNumber, value) {
+    var storage = [];
+    var storageLimit = 100;
+    this.add = function (phoneNumber, value) {
+      var index = hash(phoneNumber, storageLimit);
+      if (storage[index] === undefined) {
+        storage[index] = [[phoneNumber, value]];
+      }
+      else {
+        var inserted = false;
+        for (var i = 0; i < storage[index].length; i++) {
+          if (storage.phoneNumber === phoneNumber) {
+            storage.value = value;
+          }
+        }
+        if (inserted === false) {
+          storage[index].push([phoneNumber, value]);
+        }
+      }
+    };
+    this.lookup = function (phoneNumber) {
+      var index = hash(phoneNumber, storageLimit);
+      if (storage[index] === undefined) {
+        return undefined;
+      }
+      else {
+        for (var i = 0; i < storage[index].length; i++) {
+          if (storage[index][0][1].phoneNumber === phoneNumber) {
+            return storage[index][0][1];
+          }
+        }
+      }
+    };
+  }
+}
+
+let info = new HashTable();
+info.add("555-867-5309", {
+  name: "Sammi",
+  address: "13 Neibolt St",
+  phoneNumber: "555-867-5309"
+});
+info.add("555-123-4567", {
+  name: "Julian",
+  address: "77 Songbird Sq",
+  phoneNumber: "555-123-4567"
+});
+info.add("555-765-4321", {
+  name: "Jake",
+  address: "343 Spring St",
+  phoneNumber: "555-765-4321"
+});
+info.add("555-666-1313", {
+  name: "Nathaniel",
+  address: "75 Block Cr",
+  phoneNumber: "555-666-1313"
+});
+info.add("555-777-7777", {
+  name: "Jamie",
+  address: "4 Raintree Ave",
+  phoneNumber: "555-777-7777"
+});
+info.add("555-706-1989", {
+  name: "Roy",
+  address: "98 Electric Ave",
+  phoneNumber: "555-706-1989"
+});
+info.add("555-123-2006", {
+  name: "Ashley",
+  address: "118 Brushwood Wy",
+  phoneNumber: "555-123-2006"
+});
+
+console.log(info.lookup("555-867-5309"));
+
+
+
+
+
+7. Build a system that allows a store owner to track their store's inventory using a hash table for storage.
+---
+***Lipstick company, searching lipstick by shade***
+(addInventory, findInventory, allInventory)
+---
+
+var hash = (string, max) => {
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % max;
+};
+
+class HashTable {
+  constructor(shade, value) {
+    var storage = [];
+    var storageLimit = 100;
+    this.addInventory = function(shade, value) {
+      var index = hash(shade, storageLimit);
+      if (storage[index] === undefined) {
+        storage[index] = [[shade, value]];
+      } else {
+        var inserted = false;
+        for (var i = 0; i < storage[index].length; i++) {
+          if (storage.shade === shade) {
+            storage.value = value;
+          }
+        }
+        if (inserted === false) {
+          storage[index].push([shade, value]);
+        }
+      }
+    };
+    this.findInventory = function(shade) {
+      var index = hash(shade, storageLimit);
+      if (storage[index] === undefined) {
+        return undefined;
+      } else {
+        for (var i = 0; i < storage[index].length; i++) {
+          if (storage[index][0][1].shade === shade) {
+            return storage[index][0][1];
+          }
+        }
+      }
+    };
+    this.allInventory = function() {
+      console.log(JSON.stringify(storage));
+    };
+  }
+}
+
+let info = new HashTable();
+info.addInventory("daydreams", {
+  type: "matte",
+  shade: "daydreams",
+  stock: "8"
+});
+info.addInventory("ruby red", {
+  type: "matte",
+  shade: "ruby red",
+  stock: "6"
+});
+info.addInventory("liquid plum", {
+  type: "gloss",
+  shade: "liquid plum",
+  stock: "10"
+});
+
+console.log(info.findInventory("liquid plum"));
+console.log(info.allInventory());
+
+
+
+
+
+8. Build a system that allows digital copies of newspapers to be entered and searched by publisher and publication date. 
+Use hash tables to store the necessary data.
+
+var hash = (string, max) => {
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % max;
+};
+
+class HashTable {
+  constructor(publisher, publishDate) {
+    var storage = [];
+    var storageLimit = 100;
+    this.enter = function (publishInfo) {
+      var index = hash(publishInfo.publisher, storageLimit);
+      if (storage[index] === undefined) {
+        storage[index] = publishInfo;
+      }
+      else {
+        var inserted = false;
+        for (var i = 0; i < storage[index].length; i++) {
+          if (storage.publisher === publishInfo.publisher) {
+            storage.publishDate = publishInfo.publishDate;
+          }
+        }
+        if (inserted == false) {
+          storage[index].push([publisher, publishDate]);
+        }
+      }
+    };
+    this.search = function (publisher, publishDate) {
+      var index = hash(publisher, storageLimit);
+      if (storage[index] === undefined) {
+        return undefined;
+      }
+      else {
+        for (var i = 0; i < storage.length; i++) {
+          if (storage[index].publisher === publisher &&
+            storage[index].publishDate === publishDate) {
+            return storage[index];
+          }
+        }
+      }
+    };
+  }
+}
+
+let info = new HashTable();
+info.enter({
+  publisher: "New York Times",
+  publishDate: "07-06-1989",
+  headline: "IKEA Opens Convenient New Landfill Location"
+});
+info.enter({
+  publisher: "The Providence Journal",
+  publishDate: "01-23-2006",
+  headline: "Martians Invade Earth"
+});
+info.enter({
+  publisher: "Motif Magazine",
+  publishDate: "10-31-2014",
+  headline: "The Ultimate Truth Revealed"
+});
+info.enter({
+  publisher: "Anchor News",
+  publishDate: "11-11-2011",
+  headline: "Santa Ana Winds Cause Mass Hysteria"
+});
+
+console.log(info.search("Motif Magazine", "10-31-2014"));

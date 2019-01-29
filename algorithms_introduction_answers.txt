@@ -1,0 +1,75 @@
+EXERCISES
+
+1. Using proper pseudo-code, describe the following primitive algorithms:
+- MAKING COFFEE
+- WASHING DISHES
+- A CHOICE OF YOUR OWN
+
+
+
+MAKING COFFEE
+FUNCTION makeCoffee
+  IF coffee is not ground THEN
+    grind coffee
+  ELSE
+    scoop ground coffee into coffee filter
+  OBTAIN water && fill coffee maker
+  SET mug underneath coffee dispenser
+  SET coffee maker to ON
+  INIT brew button
+  RETRIEVE full coffee cup
+END FUNCTION
+
+
+
+WASHING DISHES
+FUNCTION washDishes
+  OBTAIN rubber gloves
+  OBTAIN sponge
+    SET dish soap into sponge
+  SET water to ON && HOT 
+  OBTAIN dish from stack THEN
+    rub dish with sponge under hot water
+  INPUT clean dish to drying rack
+END FUNCTION 
+
+
+
+FREE CHOICE: PUMPING GAS
+FUNCTION pumpGas
+  SET car at gas pump
+  OBTAIN credit card from wallet
+  EXIT car
+    THEN REMOVE gas cap  
+  RUN credit card && SELECT gas type
+  OBTAIN pump from lever
+    THEN insert pump into tank
+  WHILE more gas is desired
+    CONTINUE to press down on pump
+    THEN release pump
+  RETURN pump to lever
+  CLOSE gas cap
+END FUNCTION
+
+
+
+
+
+2. As with the knot algorithm, there may be more than one way to solve the problem. It is essential to try to pick the best algorithm for a situation. Name three companies who created an algorithm that made them successful, e.g., Google's search algorithm. It doesn't need to be a tech example (such as a recipe or manufacturing a product). Google's algorithm produces more relevant results than other search engines; what about each of your cases make them stand out?
+
+1. SETH PRIEBATSCH of LEVELUP
+  Used an interchange reduction algorithm to reduce the cost of credit card transactions.
+
+2. PETER HART, NILS NILSSON, & BERTRAM RAPHAEL OF THE SHAKEY PROJECT
+  Created the A* ("A Star") algorithm that is widely used in pathfinding and graph traversal, the process of finding a path between multiple nodes.
+
+3. ALAN TURING
+  Created the Turing machine, a system of rules, states and transitions, officially formalizing the concept of an algorithm. 
+
+
+
+
+
+3. Hypothesize about what constitutes an efficient algorithm versus an inefficient algorithm.
+
+I believe that when it comes to computer science, speed is a very important part of the process. Therefore, an efficient algorithm will use the least amount of steps required to still accomplish the task effectively. An inefficient algorithm will use more steps than necessary, in terms of both time and resources. 

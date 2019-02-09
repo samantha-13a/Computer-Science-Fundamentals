@@ -1,0 +1,174 @@
+EXERCISES
+
+1. Define and compare recursion and iteration.
+
+RECURSION: The technique where a procedure calls itself with parameters incrementally moving toward one of the base cases.
+
+ITERATION: The technique of utilizing a loop to repeat a process. 
+
+Recursion and iteration both repeatedly executes the set of instructions. Recursion is when a statement in a function calls itself repeatedly. The iteration is when a loop repeatedly executes until the controlling condition becomes false. The primary difference between recursion and iteration is that is a recursion is a process, always applied to a function. The iteration is applied to the set of instructions which we want to get repeatedly executed.
+
+
+
+2. Name five algorithms that are commonly implemented by recursion. 
+
+- Factorial of a Number
+- Greatest Common Divisor
+- Fibonacci Numbers
+- Linked List Print
+- Reversing a String
+
+
+
+3. When should you use recursion, and when should you avoid recursion? Give examples for each.
+
+People use recursion only when it is very complex to write iterative code.
+
+You generally would not want to use recursive calls when doing kernel-level programming, for instance, as this is likely to be an extremely stack-constrained environment. Too many levels of recursive calls will exhaust system resources for your call stack, and this will result in bad things happening (memory faults, stack-heap collision, etc.). Also, in your recursive calls, you may wind up calling your function twice with the same arguments, thus unnecessarily repeating work. 
+
+Iterative solutions are usually more efficient than recursive solutions as they don't incur the overhead of the multiple method calls.
+
+We use Recursion when we have to perform a complex task that can be broken into the several subtasks. 
+
+What recursion adds in the beauty department, it loses in the time inefficiencies and (sometimes)oversight of logic flaws. Iterative loops don't have to rely on the call stack to store all their data, which means that when data gets large, they don't immediately run the risk of a stack overflow. Recursive functions do.
+
+Recursion is good for problems that can be broken into treelike structures.
+
+
+
+4. Compare the recursive and iterative solutions to the three algorithms from the checkpoint (factorial, maximum, and fibonacci). What is similar, and what is different?
+
+FACTORIAL 
+
+RECURSIVE 
+FUNCTION factorial(number)
+  IF number IS LESS THAN 0 THEN
+    ERROR
+  ELSE IF number IS 0 OR 1 THEN
+    RETURN 1
+  ELSE
+    CALL factorial WITH number MINUS one RETURNING previousFactorial
+    RETURN number TIMES previousFactorial
+  END IF
+END FUNCTION
+
+ITERATIVE 
+FUNCTION factorial(number)
+  IF number < 0
+    ERROR
+  ELSE
+    SET result to 1
+
+    FOR i = number DOWN to 2
+      SET result to result * i
+    END FOR
+
+    RETURN result
+  END IF
+END FUNCTION
+
+These two functions start off the same way, throwing an error under the same circumstances: negative numbers. However, in the recursive solution, if the number passed is 0 or 1, we return 1, and then find the factorial of the previous number and multiply it by the current number. Meanwhile, with the iterative version, we keep a running result variable tracking the calculations, initializing the result to 1 and then emulating a "multiply by  factorial(number - 1)" process.
+
+
+
+MAXIMUM 
+
+RECURSIVE 
+FUNCTION maximum(numbers)
+  IF numbers is empty THEN
+    ERROR
+  ELSE IF SIZE OF numbers IS 1 THEN
+    RETURN ONLY ITEM IN numbers
+  ELSE
+    SET possibleMaximum to FIRST ITEM IN numbers
+    SET remainingNumbers to numbers WITHOUT THE FIRST ITEM
+    CALL maximum WITH remainingNumbers RETURNING remainingMaximum
+
+    IF possibleMaximum > remainingMaximum THEN
+      RETURN possibleMaximum
+    ELSE
+      RETURN remainingMaximum
+    END IF
+  END IF
+END FUNCTION
+
+ITERATIVE
+FUNCTION maximum(numbers)
+  SET currentMaximum to FIRST OF numbers
+
+  FOR EACH number IN numbers AFTER THE FIRST
+    IF number > currentMaximum THEN
+      SET currentMaximum to number
+    END IF
+  END FOR
+
+  RETURN currentMaximum
+END FUNCTION 
+
+So with this one, the iterative version is much cleaner than the recursive. You can just see how much more coding it takes with recursion to get your answer, meanwhile iteration is quick. The recursive version has to be set to throw an error under a specific set of circumstances, meanwhile the iterative solution does not, because it is initialized with the first number right off. The recursive solution follows a long list of rules, meanwhile all the iterative solution does is go down the line and compare numbers, picking out the largest number as it runs down the line. 
+
+
+
+FIBONACCI 
+
+RECURSIVE 
+FUNCTION fibonacci(number)
+  IF number < 1 THEN
+    ERROR
+  ELSE IF number = 1 or 2 THEN
+    RETURN 1
+  ELSE
+    CALL fibonacci WITH number - 2 RETURNING twoBack
+    CALL fibonacci WITH number - 1 RETURNING oneBack
+    RETURN twoBack + oneBack
+  END IF
+END FUNCTION
+
+ITERATIVE 
+FUNCTION fibonacci(number)
+  SET previous to 1
+  SET current to 1
+
+  FOR i = 3 to number
+    SET newCurrent to previous + current
+
+    SET previous to current
+    SET current to newCurrent
+  END FOR
+
+  RETURN current
+END FUNCTION
+
+Here is another one where the recursive solution requires an initial option to throw an error, meanwhile the iterative solution does not. The only solutions out of the three where this was similar was the first one, the factorial solution, where both solutions started with a possible error call. In the recursive solution, we keep track of one number, meanwhile in the iterative one, we keep track of two. Also, the recursive solution finds the final calculation with a mathematical equation, meanwhile the iterative solution just returns the end of the loop.
+
+
+
+5. Given a multi-dimensional collection (such as an array) where the number of dimensions is unknown, write a recursive algorithm to count the number of items in the entire collection.
+
+var countItems = function(array) {
+  if (array.length) {
+    return 1 + countItems(array.slice(1));
+  } else {
+    return 0;
+  }
+}
+
+
+
+6. A palindrome is a word or phrase whose spelling is the same either direction (e.g., racecar). Write a recursive algorithm to determine if a given word or phrase is a palindrome.
+
+var  checkPalindrome = function(input, palindrome) {
+  if (palindrome.pop() === (palindrome.shift() || "undefined")) {
+    return checkPalindrome(input, palindrome);
+  } else if (input.length > 1 && palindrome.length === 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
+
+7. Google Easter Egg: Google the term "recursion". Google will prompt you with "Did you mean: recursion". Explain why this behavior exhibits properties of recursion. 
+
+Recursion is the repeated application of a recursive procedure; it occurs when a thing is defined in terms of itself or of its type; it is a process that calls itself over and over again. Google throws up the "Did you mean: recursion" prompt, and if you click it, it just keeps reloading the same page, with the same results and information, with the same prompt, over and over again - effectively calling itself. 

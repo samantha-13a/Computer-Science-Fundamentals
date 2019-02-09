@@ -1,0 +1,72 @@
+SHORT ANSWER
+
+1. What is a real-life scenario that uses linear search?
+
+Scrolling through a phone book on your phone. You scroll right through from top to bottom.
+
+
+
+2. What is a real-life scenario that uses binary search?
+
+Searching for a book at the library. You are able to see a large number of the books all at once. You can go straight to the middle rack, see where you are alphabetically, and cut things down from there. 
+
+
+
+3. Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using linear search?
+
+Seven.
+
+
+
+4. Given the alphabetically sorted collection in this checkpoint, how many iterations would it take to find the value G using binary search?
+
+Three.
+
+
+
+5. Given an unsorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+
+For this one, despite a million items being a very large number of items, you would be forced to conduct a linear search, because binary search only works on sorted collections. 
+
+
+
+6. Given a sorted collection of a million items, which algorithm would you choose between linear search and binary search? Explain your reasoning.
+
+I think for this one a binary search would absolutely make the most sense. A million items is a massive number that would take forever to search through with a linear approach. What if the item you're looking for happens to be near the end? Since it's sorted, splitting it in half and searching via binary search would absolutely quicken the process, unless the item you're looking for just so happens to be at the very beginning of the list - but there's no way to know that for sure. 
+
+
+
+
+PROGRAMMING ASSIGNMENT
+
+1. You and a friend have set a wager to see who can find the word "Albatross" in the dictionary the fastest. Write a program to allow you to win the bet.
+
+function findAlbatross(array, target) {
+  for (let i = 0; i < array.length; i++) {
+    if (array[i] === target) return i;
+  }
+  return -1;
+}
+
+It is known that the target word is "Albatross", which will be near the beginning of the dictionary, so that is why I chose a linear search algorithm for this challenge. 
+
+
+
+2. You work at a pet store, and a child has asked you to net the only white-spotted goldfish from the fish tank. Write a program that will help you net the right fish.
+
+function findFish(array, target) {
+  let left = 0;
+  let right = array.length - 1;
+  while (left <= right) {
+    const mid = left + Math.floor((right - left) / 2);
+    if (array[mid] === target) {
+      return mid;
+    }
+    if (array[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+  return -1;
+}

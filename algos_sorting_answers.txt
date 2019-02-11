@@ -1,0 +1,77 @@
+EXERCISES
+
+1. Write pseudocode for bubble sort.
+
+FUNCTION bubbleSort(collection)
+   REPEAT
+     SET swapped to false
+     FOR i = FIRST INDEX of collection to LAST INDEX of collection - 1
+       IF collection[i] > collection[i + 1] THEN
+         SET tmp to collection[i]
+         SET collection[i] to collection[i + 1]
+         SET collection[i + 1] to tmp
+         SET swapped to true
+       END IF
+     END FOR
+   UNTIL swapped is FALSE
+   RETURN collection
+ END FUNCTION
+
+
+
+2. Write pseudocode for quicksort.
+
+FUNCTION quickSort(left, right, pivot)
+   leftPointer = left
+   rightPointer = right - 1
+    WHILE TRUE DO
+      WHILE A[++leftPointer] < pivot DO           
+      END WHILE
+      WHILE rightPointer > 0 && A[--rightPointer] > pivot DO        
+      END WHILE
+      IF leftPointer >= rightPointer
+         BREAK
+      ELSE                
+         SWAP leftPointer, rightPointer
+      END IF 
+   END WHILE  
+   SWAP leftPointer, right
+   RETURN leftPointer
+END FUNCTION
+
+
+3. We talked about time complexity in a previous checkpoint, and how to get an idea of the efficiency of an algorithm. After looking at the pseudocode for the above sorting methods, identify why merge sort and quick sort are much more efficient than the others. Walking through each algorithm with a few sample collections may help.
+
+There seems to be no argument that merge sort and quick sort are the superior sorting methods. One quick Google search and you will find numerous results of just people debating between which of the two specifically is the best sorting method of them all.
+
+One simple answer is, these methods are faster than the others. The others tend to have more complicated processes and require more iterations. The others are also more cache-inefficient, with these being cache-oblivious. Quick sort-specifically, it is slightly sensitive to input that is already in the right order, allowing it to skip some steps, thus speeding up the process even more. Speed and efficiency is a really big deal here. Insertion sort is absolutely the most inefficient because it moves through the collection one at a time no matter what, which is tedious and unecessary unless you are working with a very small collection. Selection sort performs so badly that it can be described as unstable - Swapping elements from the beginning of the array with the spot vacated by the minimum element can mess up an already sorted order. Quick sort and merge sort are designed to avoid problems like that. And then bubble sort, specifically, is notorious for being slow. 
+
+
+
+4. All of the sorts addressed in this checkpoint are known as comparison sorts. Research bucket sort and explain how it works. What is the ideal input for bucket sort?
+
+Bucket sort can also be referred to as Bin sort. In this method, you distribute the items of the collection into separate 'buckets'. 
+
+Here is pseudocode for bucket sort, as per Wikipedia:
+
+function bucketSort(array, k) is
+  buckets ← new array of k empty lists
+  M ← the maximum key value in the array
+  for i = 1 to length(array) do
+    insert array[i] into buckets[floor(array[i] / M * k)]
+  for i = 1 to k do
+    nextSort(buckets[i])
+  return the concatenation of buckets[1], ...., buckets[k]
+
+array = array to be sorted
+k = number of buckets to use 
+
+The steps:
+- Set up an array of initially empty "buckets".
+- Scatter: Go over the original array, putting each object in its bucket.
+- Sort each non-empty bucket.
+- Gather: Visit the buckets in order and put all elements back into the original array.
+
+Each bucket here is sorted individually. To sort the buckets, you can either go the iterative way by applying a different sorting method, or use recursion and apply the bucket search to itself. Bucket sort can be characterized as a distribution sort or a comparison sort depending on how it is implemented. 
+
+The ideal input for bucket sort would be input that is uniformly distributed over a range, so that each bucket ends up with the same number of items.

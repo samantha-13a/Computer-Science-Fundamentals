@@ -8,24 +8,33 @@ EXERCISES
 - $15.99: Currency
 
 2. Explain when a database would be used. Explain when a text file would be used.
-A database would be used when the file would not ever need to be read by humans. Since databases run through computer interfaces, they are strictly unreadable by humans. A text file, on the other hand, can be read by humans, so you would use that when it would be necessary for a person to be able to go into the data and personally look at it and make changes. You would also use a database when there is a need to easily search for specific data, and to handle multiple applications accessing the data and changing it at the same time (in the case of a text file, if that happens, the file will lock, or the data will be overwritten, which is not good).
+A database would be used when the file would not ever need to be read by humans. Since databases run through computer 
+interfaces, they are strictly unreadable by humans. A text file, on the other hand, can be read by humans, so you would use 
+that when it would be necessary for a person to be able to go into the data and personally look at it and make changes. You 
+would also use a database when there is a need to easily search for specific data, and to handle multiple applications 
+accessing the data and changing it at the same time (in the case of a text file, if that happens, the file will lock, or the 
+data will be overwritten, which is not good).
 
 3. Describe one difference between SQL and other programming languages.
 SQL is declarative rather than procedural. 
 
 4. In your own words, explain how the pieces of a database fit together at a high level.
-A database has many high-level components that need to come together to make sure everything will work correctly and efficiently.
+A database has many high-level components that need to come together to make sure everything will work correctly and 
+efficiently.
 - We have the SOFTWARE, which controls and manages the overall database. 
 - We have the HARDWARE, which is the physical pieces, for instance, storage devices, which provides the interface.
 - We have the DATA, the operational data and the metadata, which is stored.
 - We have the PROCEDURES, which are the set instructions for how the database will work.
-- We have the DATABASE ACCESS LANGUAGE, which is the language in which the engineer must write commands to access the data, enter new data, update existing data, or retrieve data.
+- We have the DATABASE ACCESS LANGUAGE, which is the language in which the engineer must write commands to access the data, 
+enter new data, update existing data, or retrieve data.
 - We have the QUERY PROCESSOR, which translates the users query into something the database can understand on a low level.
-- We have the RUN TIME DATABASE MANAGER, aka the database control system, which provides control to maintain the consistency, integrity, and security of the data. It is the central component of the overall database system. 
+- We have the RUN TIME DATABASE MANAGER, aka the database control system, which provides control to maintain the consistency, 
+integrity, and security of the data. It is the central component of the overall database system. 
 - We have the DATA MANAGER, aka the cache manager, which allows the database to recover if it crashes.
 - We have the DATABASE ENGINE, which stores, processes, and secures the data. 
 - We have the DATA DICTIONARY, which stores information about the database itself.
-- And lastly we have the REPORT WRITER, aka the report generator, which extracts specified information and presents it in a specified format, for instance, columns and rows. 
+- And lastly we have the REPORT WRITER, aka the report generator, which extracts specified information and presents it in a 
+specified format, for instance, columns and rows. 
 
 5. Explain the meaning of table, row, column, and value.
 Table: A data structure used to organize information. 

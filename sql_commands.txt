@@ -2,8 +2,7 @@ EXERCISES
 
 -----
 
-Use the commands above to complete the following tasks, and submit the SQL statements. Real-world examples must be distinct 
-from those used in the text.
+Use the commands above to complete the following tasks, and submit the SQL statements. Real-world examples must be distinct from those used in the text.
 
 -----
 
@@ -68,17 +67,14 @@ INTEGER: a signed integer (ex. 1, 2, 3...)
 Example: A dog groomer could use this to log how many dogs visit their salon each day of the last week. 
 
 REAL: a floating point value (ex. 1.5, 2.5, 3.5...)
-Example: This would be useful when taking a group of people and finding out the average of who has brown eyes vs other color 
-eyes. 
+Example: This would be useful when taking a group of people and finding out the average of who has brown eyes vs other color eyes. 
 
 TEXT: a text string 
 Example: You could use this to save different greetings for greeting cards.
 
 
 
-4. Decide how to create a new table to hold a list of people invited to a wedding dinner. The table needs to have first and 
-last names, whether they sent in their RSVP, the number of guests they are bringing, and the number of meals (1 for adults and 
-1/2 for children).
+4. Decide how to create a new table to hold a list of people invited to a wedding dinner. The table needs to have first and last names, whether they sent in their RSVP, the number of guests they are bringing, and the number of meals (1 for adults and 1/2 for children).
 
 CREATE TABLE dinner (
   name text,
@@ -101,24 +97,23 @@ CREATE TABLE dinner (
   ALTER TABLE dinner
   ADD thanks text;
 
-- You have decided to move the data about the meals to another table, so write a command to remove the column storing the 
-number meals from the wedding table.
-  ALTER TABLE dinner DROP COLUMN meals; 
+- You have decided to move the data about the meals to another table, so write a command to remove the column storing the number meals from the wedding table.
+  ALTER TABLE dinner 
+  DROP COLUMN meals; 
 
 - The guests will need a place to sit at the reception, so write a command that adds a column for table number.
   ALTER TABLE dinner
-  ADD table integer;
+  ADD table_no integer;
 
-- The wedding is over and we do not need to keep this information, so write a command that deletes the table numbers from the 
-database.
-  DROP TABLE dinner;
+- The wedding is over and we do not need to keep this information, so write a command that deletes the table numbers from the database.
+  ALTER TABLE dinner
+  DROP COLUMN table_no;
 
 
 
-5. Write a command to create a new table to hold the books in a library with the columns ISBN, title, author, genre, 
-publishing date, number of copies, and available copies.
+5. Write a command to create a new table to hold the books in a library with the columns ISBN, title, author, genre, publishing date, number of copies, and available copies.
   CREATE TABLE library_books (
-    isbn integer,
+    isbn char,
     title text,
     author text,
     genre text,
@@ -135,16 +130,14 @@ publishing date, number of copies, and available copies.
   (0380729407, 'Something Wicked This Way Comes', 'Ray Bradbury', 'Classics', 1998-03-01, 15, 9);
 
 - Someone has just checked out one of the books. Change the number of available copies to 1 fewer.
-  UPDATE library_books SET available=3 WHERE isbn=0143039989;
+  UPDATE library_books SET available = available - 1 WHERE isbn=0143039989;
 
 - Now one of the books has been added to the banned books list. Remove it from the table.
   DELETE FROM library_books where isbn=0380729407;
 
 
 
-6. Write a command to make a new table to hold spacecrafts. Information should include id, name, year launched, country of 
-origin, a brief description of the mission, orbiting body, if it is currently operating, and its approximate miles from Earth. 
-In addition to the table creation, provide commands that perform the following operations:
+6. Write a command to make a new table to hold spacecrafts. Information should include id, name, year launched, country of origin, a brief description of the mission, orbiting body, if it is currently operating, and its approximate miles from Earth. In addition to the table creation, provide commands that perform the following operations:
   CREATE TABLE spacecrafts (
     id integer,
     name text,
@@ -152,31 +145,26 @@ In addition to the table creation, provide commands that perform the following o
     origin text,
     mission text,
     orbiting_body text,
-    currently_operating text,
+    currently_operating boolean,
     approx_distance integer
   );
 
 - Add three non-Earth-orbiting satellites to the table.
   INSERT INTO spacecrafts (id, name, launched, origin, mission, orbiting_body, currently_operating, approx_distance)
   VALUES 
-  (001, 'Luna 10', 1966-03-31, 'Soviet Union', 'First artificial satellite of the Moon - plasma studies, gravitational 
-  studies, measuring infrared emissions and radiation', 'Moon', 'No', 238855),
-  (002, '2001 Mars Odyssey', 2001-04-01, 'United States', 'To use spectrometers and a thermal imager to detect evidence of 
-  past or present water and ice, as well as study the planet's geology and radiation environment', 'Mars', 'Yes', 33926867),
-  (003, 'Venera 16', 1983-06-07, 'Soviet Union', 'To map the surface of Venus using high resolution imaging systems', 'Venus', 
-  'No', 162177881);
+  (001, 'Luna 10', 1966-03-31, 'Soviet Union', 'First artificial satellite of the Moon - plasma studies, gravitational studies, measuring infrared emissions and radiation', 'Moon', 'no', 238855),
+  (002, '2001 Mars Odyssey', 2001-04-01, 'United States', 'To use spectrometers and a thermal imager to detect evidence of past or present water and ice, as well as study the planet's geology and radiation environment', 'Mars', 'yes', 33926867),
+  (003, 'Venera 16', 1983-06-07, 'Soviet Union', 'To map the surface of Venus using high resolution imaging systems', 'Venus', 'no', 162177881);
 
 - Remove one of the satellites from the table since it has just crashed into the planet.
   DELETE FROM spacecrafts WHERE id=002;
 
 - Edit another satellite because it is no longer operating and change the value to reflect that.
-  UPDATE spacecrafts SET currently_operating='No' WHERE id=002;
+  UPDATE spacecrafts SET currently_operating='no' WHERE id=002;
 
 
 
-7. Write a command to create a new table to hold the emails in your inbox. This table should include an id, the subject line, 
-the sender, any additional recipients, the body of the email, the timestamp, whether or not you have read the email, and the 
-id of the email chain it's in. 
+7. Write a command to create a new table to hold the emails in your inbox. This table should include an id, the subject line, the sender, any additional recipients, the body of the email, the timestamp, whether or not you have read the email, and the id of the email chain it's in. 
   CREATE TABLE inbox_emails (
     id integer, 
     subject text,
@@ -193,33 +181,12 @@ Also provide commands that perform the following operations:
 - Add three new emails to the inbox.
   INSERT INTO inbox_emails (id, subject, sender, other_recipients, body, timestamp, status, chain_id)
   VALUES 
-  (001, '5 Wits Trailer Shoot', 'zephyrgoza@5-wits.com', null, 'Greetings! If you're receiving this email, it's because you'll 
-  be participating in the trailer shoot for 5 Wits Albany this week. A couple things I wanted to get out there beforehand: 1. 
-  Please know your social security number, or be prepared to provide a document with it onsite. Legally, we are required to 
-  have you all fill out W9 forms before we can pay you anything. 2. If you are interested in trying out the adventures before 
-  we film in them, I will be onsite about 7:30 PM on Tuesday. Feel free to grab a couple of friends, or come by yourself, and 
-  we'll be happy to comp you in to try out some of the attractions. Each one takes about 30 minutes to complete, so do plan on 
-  spending a bit of time if you decide to drop by and join us. It is certainly not a requirement of participating in the 
-  shoot, but it will be a great opportunity to meet one another and get in idea of what the attractions are actually like 
-  before we add all the stage lights for filming. Thanks again and I look forward to seeing all of you there on Wednesday (or 
-  Tuesday night, if you decide to join us!)', 2019-01-13 18:08:43, 'Read', 112286),
-  (002, 'Finish Strong', 'greitzer@ric.edu', 'dubois@ric.edu', 'Hello Samantha, The dance substitutions should be all set at 
-  this point but I would like to sit down with you to review the theater substitutions (they are a bit confusing).  Please 
-  feel free to contact Ms. Suzanne Dubois, our administrative assistant, in order to schedule an appointment for us to meet.  
-  Sue handles my schedule; I have copied Sue on this email so she will be expecting to hear from you.', 2018-06-12 15:08:09, 
-  'Read', 52437),
-  (003, 'Three Fun Facts', 'smfa@selfmanagementforactors.com', 'Unknown', 'Fun Fact #1: I did the casting for Dr. Paul Ekman's 
-  instructional vids. If you've never heard of the dude, he's the expert whose work was behind the Tim Roth series Lie to Me. 
-  Fun Fact #2: When you see my hands fly up into frame during any of my kabilliondy livestreamed vids, it's not because I 
-  don't understand the limits of my frame. It's because I DO understand my brand. (Just look at all those thumbnails. Hands 
-  everywhere!), Fun Fact #3: I run all my sales material (every email, every webpage, every speaking engagement, every 
-  broadcast or podcast or interview out in the world, including what you're reading right now) through a little check to be 
-  sure that NOT ONLY will it attract the *right* people like crazy but also REPEL those I don't want to work with at any 
-  price.', 2018-02-09 04:04:22, 'Unread', 1444596);
+  (001, '5 Wits Trailer Shoot', 'zephyrgoza@5-wits.com', null, 'Greetings! If you're receiving this email, it's because you'll be participating in the trailer shoot for 5 Wits Albany this week. A couple things I wanted to get out there beforehand: 1. Please know your social security number, or be prepared to provide a document with it onsite. Legally, we are required to have you all fill out W9 forms before we can pay you anything. 2. If you are interested in trying out the adventures before we film in them, I will be onsite about 7:30 PM on Tuesday. Feel free to grab a couple of friends, or come by yourself, and we'll be happy to comp you in to try out some of the attractions. Each one takes about 30 minutes to complete, so do plan on spending a bit of time if you decide to drop by and join us. It is certainly not a requirement of participating in the shoot, but it will be a great opportunity to meet one another and get in idea of what the attractions are actually like before we add all the stage lights for filming. Thanks again and I look forward to seeing all of you there on Wednesday (or Tuesday night, if you decide to join us!)', 2019-01-13 18:08:43, 'Read', 112286),
+  (002, 'Finish Strong', 'greitzer@ric.edu', 'dubois@ric.edu', 'Hello Samantha, The dance substitutions should be all set at this point but I would like to sit down with you to review the theater substitutions (they are a bit confusing).  Please feel free to contact Ms. Suzanne Dubois, our administrative assistant, in order to schedule an appointment for us to meet.  Sue handles my schedule; I have copied Sue on this email so she will be expecting to hear from you.', 2018-06-12 15:08:09, 'Read', 52437),
+  (003, 'Three Fun Facts', 'smfa@selfmanagementforactors.com', 'Unknown', 'Fun Fact #1: I did the casting for Dr. Paul Ekman's instructional vids. If you've never heard of the dude, he's the expert whose work was behind the Tim Roth series Lie to Me. Fun Fact #2: When you see my hands fly up into frame during any of my kabilliondy livestreamed vids, it's not because I don't understand the limits of my frame. It's because I DO understand my brand. (Just look at all those thumbnails. Hands everywhere!), Fun Fact #3: I run all my sales material (every email, every webpage, every speaking engagement, every broadcast or podcast or interview out in the world, including what you're reading right now) through a little check to be sure that NOT ONLY will it attract the *right* people like crazy but also REPEL those I don't want to work with at any price.', 2018-02-09 04:04:22, 'Unread', 1444596);
 
 - You deleted one of the emails, so write a command to remove the row from the inbox table.
   DELETE FROM inbox_emails WHERE id=003;
 
-- You started reading an email but just heard a crash in another room. Mark the email as unread before investigating the 
-crash, so you can come back and read it later.
+- You started reading an email but just heard a crash in another room. Mark the email as unread before investigating the crash, so you can come back and read it later.
   UPDATE inbox_emails SET status="Unread" WHERE id=001;

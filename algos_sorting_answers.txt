@@ -21,22 +21,12 @@ FUNCTION bubbleSort(collection)
 
 2. Write pseudocode for quicksort.
 
-FUNCTION quickSort(left, right, pivot)
-   leftPointer = left
-   rightPointer = right - 1
-    WHILE TRUE DO
-      WHILE A[++leftPointer] < pivot DO           
-      END WHILE
-      WHILE rightPointer > 0 && A[--rightPointer] > pivot DO        
-      END WHILE
-      IF leftPointer >= rightPointer
-         BREAK
-      ELSE                
-         SWAP leftPointer, rightPointer
-      END IF 
-   END WHILE  
-   SWAP leftPointer, right
-   RETURN leftPointer
+FUNCTION quickSort(Data(), Left, Right)
+  IF Left is LESS THAN Right THEN
+    PivotPosition = Partition(Data, Left, Right)
+    quickSort(Data, Left, PivotPosition - 1)
+    quickSort(Data, PivotPosition + 1, Right)
+  END IF 
 END FUNCTION
 
 

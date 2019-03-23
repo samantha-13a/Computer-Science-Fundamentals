@@ -71,12 +71,27 @@ All data from payments where the payee is listed as 'Mega Foods'.
      FROM users
      WHERE name = 'deandre data';
 
+Results:
+
+     EMAIL             | SIGNUP 
+     datad@comcast.net | 2008-01-20
+
 - The user ID for the user with email 'aleesia.algorithm@uw.edu'.
      SELECT userid
      FROM users
      WHERE email = 'aleesia.algorithm@uw.edu';
 
+Results:
+
+     USERID 
+     1
+
 - All the columns for the user ID equal to 4.
      SELECT *
      FROM users
      WHERE userid = 4;
+
+Results:
+
+     USERID | NAME           | EMAIL             | SIGNUP 
+     4      | Brandy Boolean | bboolean@nasa.gov | 1999-10-15 

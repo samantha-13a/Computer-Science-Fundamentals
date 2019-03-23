@@ -48,6 +48,9 @@ function findAlbatross(array, target) {
   return -1;
 }
 
+let array = ["accrue", "albatross", "down", "excessive", "lament", "neuron", "slender"];
+console.log(findAlbatross(array, "albatross"));
+
 It is known that the target word is "Albatross", which will be near the beginning of the dictionary, so that is why I chose a linear search algorithm for this challenge. 
 
 
@@ -70,3 +73,6 @@ function findFish(array, target) {
   }
   return -1;
 }
+
+let array = ["biggest goldfish", "smallest goldfish", "black goldfish", "white spotted goldfish", "bubblehead goldfish", "fastest goldfish"];
+console.log(findFish(array, "white spotted goldfish"));

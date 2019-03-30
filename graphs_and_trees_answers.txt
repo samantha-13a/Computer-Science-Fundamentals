@@ -2,7 +2,11 @@ EXERCISES
 
 1. What is a binary tree and what makes it unique to other trees?
 
-A Binary Tree is a data structure in which each Node may point to a left child and a right child. All tree structures simulate a hierarchal tree structure where each Tree consists of Nodes, much like Linked Lists. A Node is a data structure consisting of a value and the ability to point to other adjacent members. Tree data structures have their Root Node at the top, and they grow downwards. A binary tree is different from other kinds of trees because a binary tree has at MOST two children for each node.
+A Binary Tree is a data structure in which each Node may point to a left child and a right child. All tree structures simulate 
+a hierarchal tree structure where each Tree consists of Nodes, much like Linked Lists. A Node is a data structure consisting 
+of a value and the ability to point to other adjacent members. Tree data structures have their Root Node at the top, and they 
+grow downwards. A binary tree is different from other kinds of trees because a binary tree has at MOST two children for each 
+node.
 
 
 
@@ -14,19 +18,23 @@ A heuristic is a guess that an algorithm makes to solve a complex problem sooner
 
 3. What is another problem besides the shortest-path problem that requires the use of heuristics?
 
-Another problem that requires the use of heuristics pertains to people who like to plau the stock market. There is software that can try to determine value predictability, and things like whether an asset would be a low or high risk to invest in.
+Another problem that requires the use of heuristics pertains to people who like to plau the stock market. There is software 
+that can try to determine value predictability, and things like whether an asset would be a low or high risk to invest in.
 
 
 
 4. What is the difference between a depth-first search and a breadth-first search?
 
-In a depth-first search, you start at the root and explore as far as possible along each branch before backtracking. In a breadth-first search, you start at the tree root and explore the neighbor nodes first, before moving to the next level neighbors.
+In a depth-first search, you start at the root and explore as far as possible along each branch before backtracking. In a 
+breadth-first search, you start at the tree root and explore the neighbor nodes first, before moving to the next level 
+neighbors.
 
 
 
 5. Explain in your own words what an undirected, a-cyclic, unweighted graph is.
 
-An undirected, a-cyclic, unweighted graph will have ambiguous edges, as in, you can travel in either direction between nodes, it will have a firm ending, being unable to form a loop, and there will be no assigned cost of travel between the nodes. 
+An undirected, a-cyclic, unweighted graph will have ambiguous edges, as in, you can travel in either direction between nodes, 
+it will have a firm ending, being unable to form a loop, and there will be no assigned cost of travel between the nodes. 
 
 
 
@@ -37,42 +45,67 @@ Directed, a-cyclic, weighted.
 
 
 
+
 PROGRAMMING QUESTIONS
 
 1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
 
-Function steps:
-1. Check whether the value of the current/root node and searched node are equal.
-  If so, value is found. 
-2. If searched value is less than the node's value:
-  If current node has no left child, searched value does not exist.
-  Otherwise, handle left child with same algorithm.
-3. If the searched value is greater than the node's value:
-  If current node has no right child, searched value does not exist.
-    Otherwise, handle right child with same algorithm. 
-
-function findValue(root, value) {
-  if (root == null) {
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+  }
+  insertNode(value) {
+    let newNode = { value, left: null, right: null };
+    if (this.root === null) {
+      this.root = newNode;
+      return;
+    }
+    let current = this.root;
+    while (true) {
+      if (value > current.value) {
+        if (!current.right) {
+          current.right = newNode;
+          break;
+        }
+        current = current.right;
+      } else if (value < current.value) {
+        if (!current.left) {
+          current.left = newNode;
+          break;
+        }
+        current = current.left;
+      } else {
+        break;
+      }
+    }
+  }
+  findValue(value) {
+    let node = this.root;
+    while (node) {
+      if (node.value === value) {
+        return true;
+      } else if (node.value > value) {
+        node = node.left;
+      } else {
+        node = node.right;
+      }
+    }
     return false;
   }
-  var nodeKey = parseInt(root.value);
-  if (value == root.value) {
-    return true;
-  } else if (value < root.value) {
-    if (root.left == null) {
-      return false;
-    } else {
-      return findValue(root.left, value);
-    }
-  } else if (value > root.value) {
-    if (root.left == null) {
-      return false;
-    } else {
-      return findValue(root.right, value);
-    }
-  }
-  return false;
 }
+
+let BST = new BinarySearchTree();
+BST.insertNode(1);
+BST.insertNode(3);
+BST.insertNode(4);
+BST.insertNode(7);
+BST.insertNode(10);
+BST.insertNode(13);
+BST.insertNode(17);
+BST.insertNode(19);
+BST.insertNode(22);
+
+console.log(BST.findValue(8));
 
 
 
@@ -80,39 +113,116 @@ function findValue(root, value) {
 
 2. Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
 
-function LCA(root, n1, n2) {
-  var leftLCA = LCA(root.left, n1, n2);
-  var rightLCA = LCA(root.right, n1, n2);
-  if (root == null) {
-    return undefined;
-  } else if (root == n1 || root == n2) {
-    return root;
-  } else if (leftLCA && rightLCA) {
-    return root;
-  } else if (leftLCA != null) {
-    return leftLCA;
-  } else {
-    return rightLCA;
+class BinarySearchTree {
+  constructor() {
+    this.root = null;
+  }
+  insertNode(value) {
+    let newNode = { value, left: null, right: null };
+    if (this.root === null) {
+      this.root = newNode;
+      return;
+    }
+    let current = this.root;
+    while (true) {
+      if (value > current.value) {
+        if (!current.right) {
+          current.right = newNode;
+          break;
+        }
+        current = current.right;
+      } else if (value < current.value) {
+        if (!current.left) {
+          current.left = newNode;
+          break;
+        }
+        current = current.left;
+      } else {
+        break;
+      }
+    }
+  }
+  findValue(value) {
+    let node = this.root;
+    while (node) {
+      if (node.value === value) {
+        return true;
+      } else if (node.value > value) {
+        node = node.left;
+      } else {
+        node = node.right;
+      }
+    }
+    return false;
+  }
+  LCA(n1, n2, node = this.root) {
+    if (!node) {
+      return null;
+    }
+    if (node.value === n1 || node.value === n2) {
+      return node;
+    }
+    let left = this.LCA(n1, n2, node.left);
+    let right = this.LCA(n1, n2, node.right);
+    if (left != null && right != null) {
+      return node;
+    } else if (left) {
+      return left;
+    } else {
+      return right;
+    }
+  }
+  depth(value, current = this.root, level = 0) {
+    if (current === null) {
+      return -1;
+    }
+    if (current.right === null && current.left === null) {
+      return level;
+    }
+    if (value === current.value) {
+      return level;
+    }
+    while (current) {
+      if (current.value === value) {
+        level++;
+        return level - 1;
+      } else if (current.value > value) {
+        level++;
+        current = current.left;
+      } else {
+        level++;
+        current = current.right;
+      }
+    }
+  }
+  findDistance(n1, n2) {
+    let node1 = this.findValue(n1);
+    let node2 = this.findValue(n2);
+    if (node1 === false || node2 === false) {
+      return null;
+    }
+    let common = this.LCA(n1, n2);
+    if (common === null) {
+      return null;
+    }
+    let depth1 = this.depth(n1);
+    let depth2 = this.depth(n2);
+    if (depth1 === -1 || depth2 === -1) {
+      return null;
+    }
+    return depth1 + depth2;
   }
 }
 
-function nodeLevel(root, k, level) {
-  var l = nodeLevel(root.left, k, level + 1);
-  if (root == null) {
-    return -1;
-  }
-  if (root == k) {
-    return level;
-  }
-  if (l != -1) {
-    return l;
-  }
-  return nodeLevel(root.right, k, level + 1);
-}
+let BST = new BinarySearchTree();
+BST.insertNode(1);
+BST.insertNode(3);
+BST.insertNode(4);
+BST.insertNode(7);
+BST.insertNode(10);
+BST.insertNode(13);
+BST.insertNode(17);
+BST.insertNode(19);
+BST.insertNode(22);
 
-function nodeDistance(root, n1, n2) {
-  var lcaValue = LCA(root, n1, n2);
-  var d1 = nodeLevel(lcaValue, n1, 0);
-  var d2 = nodeLevel(lcaValue, n2, 0);
-  return d1 + d2;
-}
+console.log(BST.findDistance(1, 22));

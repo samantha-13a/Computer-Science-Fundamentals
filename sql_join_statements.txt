@@ -1,0 +1,215 @@
+EXERCISES 
+
+1. How do you find related data held in two separate data tables?
+
+You would utilize a JOIN clause, and also primary and foreign keys. A primary key in one table is often the foreign key in another, which allows you to link the two tables.
+
+
+
+2. Explain, in your own words, the difference between an INNER JOIN, LEFT OUTER JOIN, and RIGHT OUTER JOIN. Give a real-world example for each.
+
+INNER JOIN - Selects information from both tables that meet the WHERE criteria. 
+
+Example: A 'products' and a 'productlines' table. The 'products' table has the 'productLine' column referenced to the productline column of the productlines table. ProductLine column in products table = foreign key column. You can get the productCode and productName from the products table and the textDescription of product lines from the productlines table by matching rows based on the productLine columns with INNER JOIN. 
+
+LEFT OUTER JOIN - Starts with an INNER JOIN, then, any rows from the left table that do not have a matching row that exists in the right table will also be included in the result set. The columns being selected from the right side table will return null.  
+
+Example: Matching cities to countries in Asia. First you have a "Countries" table and a "Cities" table, and use a LEFT OUTER JOIN to link the Ciyties table to the Countries table, so long as the country in the "Countries" table is listed as "Asia". 
+
+RIGHT OUTER JOIN - Same thing as a RIGHT JOIN. Starts with an INNER JOIN, then, returns all records from the right table, and the matched records from the left table. When there is no match on the left side, the result is NULL. 
+
+Example: You have a table of "Orders" and a table of "Employees". A salesman is in charge of one or more sales orders, however, some sales orders may not be attached to a particular salesman. You can use a RIGHT OUTER JOIN to show all of the employees and their sales orders, if any. If a salesman is not in charge of any sales currently, the corresponding column will return NULL. 
+
+
+
+3. Define primary key and foreign key. Give a real-world example for each.
+
+Primary Key - A unique identifier for each row in a database table. The primary key consists of one or more columns whose data contained within is used to uniquely identify each row in the table.  You can think of the primary key as an address.  If the rows in a table were mailboxes, then the primary key would be the listing of street addresses. When a primary key is composed of multiple columns, the data from each column is used to determine whether a row is unique.
+In order to be a primary key, several conditions must hold true.  First, as we mentioned, the columns must be unique.  To clarify, we’re referring to the data within the rows, not the column names themselves.  Also, no value in the columns can be blank or NULL. When defining a table you specify the primary key. A table has just one primary key, and its definition is mandatory. The primary key for each table is stored in an index.  The index is used to enforce the uniqueness requirement.  It also makes it easy for foreign key values to refer back to corresponding primary key values, as we will learn about in the following section.
+
+Example: You have an "Employees" table and a "Departments" table. The "Employees" table includes a column for Employee ID Numbers, which will reasonably be the primary key. They are identifying factors that will surely never conflict with any other employee, and will always remain unique to every individual employee and the information attached to them. It essentially functions in the same way as a social security number. 
+
+Foreign Key - The primary key of one table that is included as a non-unique attribute in another table. A foreign key is a column (or columns) that references a column (most often the primary key) of another table. The purpose of the foreign key is to ensure referential integrity of the data. In other words, only values that are supposed to appear in the database are permitted. The table containing the foreign key is called the child table, and the table containing the candidate key is called the referenced or parent table.
+
+Example: There is a "Persons" table and an "Orders" table. A "PersonID" column in the "Orders" table points to a "PersonID" column in the "Persons" table. The "PersonID" column in the "Persons" table is the PRIMARY KEY in the "Persons" table. The "PersonID" column in the "Orders" table is a FOREIGN KEY in the "Orders" table. The FOREIGN KEY constraint is used to prevent actions that would destroy links between tables. The FOREIGN KEY constraint also prevents invalid data from being inserted into the foreign key column, because it has to be one of the values contained in the table it points to.
+
+
+
+4. Define aliasing.
+
+Aliasing - The technique of creating short variable names, usually a single letter, to replace the table name in a query.
+
+
+
+5. Change this query so that you are using aliasing:
+
+SELECT professor.name, compensation.salary, compensation.vacation_days 
+FROM professor 
+JOIN compensation 
+ON professor.id = compensation.professor_id;
+
+SELECT p.name, c.salary, c.vacation_days
+FROM professor AS p 
+JOIN compensation AS c 
+ON p.id = c.p_id;
+
+
+
+6. Why would you use a NATURAL JOIN? Give a real-world example.
+
+The SQL NATURAL JOIN is a type of EQUI JOIN and is structured in such a way that, columns with the same name of associated tables will appear once only.
+
+Perhaps you have a foods table and a company table, where company ids in each table match. You can join the two tables with a NATURAL JOIN to put all the unique columns together and see which companies are holding which food items. 
+
+
+
+7. Using this Employee schema and data, write queries to find the following information:
+https://www.db-fiddle.com/f/sG1TKgR15GhH8cjbAwzjAm/0
+
+- List all employees and all shifts.
+
+SELECT * FROM employees NATURAL JOIN scheduled_shifts;
+
+
+
+8. Using this Adoption schema and data, please write queries to retrieve the following information and include the results:
+https://www.db-fiddle.com/f/tpodLv3A43VL4gHqohqx2o/0
+
+- Create a list of all volunteers. If the volunteer is fostering a dog, include each dog as well.
+
+SELECT first_name, last_name, foster_dog_id, dogs.name
+FROM volunteers
+LEFT JOIN dogs
+ON volunteers.foster_dog_id = dogs.id;
+
+RESULTS:
+
+first_name	last_name	  foster_dog_id	  name
+Rubeus	    Hagrid	    10002	          Munchkin
+Marjorie	  Dursley	    10006	          Marmaduke
+Sirius	    Black	      null	          null
+Remus	      Lupin	      null	          null
+Albus	      Dumbledore	null	          null
+
+
+- The cat's name, adopter's name, and adopted date for each cat adopted within the past month to be displayed as part of the "Happy Tail" social media promotion which posts recent successful adoptions.
+
+SELECT adopters.first_name, adopters.last_name, cat_adoptions.date,  cats.name
+FROM adopters
+JOIN cat_adoptions
+ON cat_adoptions.adopter_id = adopters.id
+JOIN cats
+ON cat_adoptions.cat_id = cats.id
+WHERE date >= date_trunc('month', current_date - interval '1' month)
+  AND date < date_trunc('month', current_date);
+
+RESULTS: 
+
+first_name	last_name	date	                    name
+Arabella	  Figg	    2019-03-14T00:00:00.000Z	Mushi
+Argus	      Filch	    2019-03-19T00:00:00.000Z	Victoire
+
+
+- Create a list of adopters who have not yet chosen a dog to adopt.
+
+SELECT first_name, last_name 
+FROM adopters
+FULL OUTER JOIN dog_adoptions
+ON adopters.id = dog_adoptions.adopter_id
+LEFT JOIN dogs
+ON dog_adoptions.dog_id = dogs.id
+WHERE dogs.id is null;
+
+RESULTS: 
+
+first_name	last_name
+Arabella	  Figg
+Hermione	  Granger
+
+
+- Lists of all cats and all dogs who have not been adopted.
+
+SELECT name
+FROM cats
+FULL OUTER JOIN cat_adoptions
+ON cats.id = cat_adoptions.cat_id
+WHERE cat_adoptions.date is null;
+
+SELECT name
+FROM dogs
+FULL OUTER JOIN dog_adoptions
+ON dogs.id = dog_adoptions.dog_id
+WHERE dog_adoptions.date is null;
+
+RESULTS:
+
+Query #1
+name
+Seashell
+Nala
+
+Query #2
+name
+Munchkin
+Boujee
+Lassie
+Marley
+Marmaduke
+
+
+- The name of the person who adopted Rosco.
+
+SELECT first_name, last_name
+FROM adopters
+INNER JOIN dog_adoptions 
+ON adopters.id = dog_adoptions.adopter_id
+JOIN dogs
+ON dogs.id = dog_adoptions.dog_id
+WHERE dogs.name = 'Rosco';
+
+RESULTS: 
+
+first_name	last_name
+Argus	      Filch
+
+
+
+9. Using this Library schema and data, write queries applying the following scenarios and include the results:
+https://www.db-fiddle.com/f/j4EGoWzHWDBVtiYzB9ygC4/0
+
+- To determine if the library should buy more copies of a given book, please provide the names and position, in order, of all of the patrons with a hold (request for a book with all copies checked out) on "Advanced Potion-Making".
+
+SELECT patrons.name, holds.rank, books.title
+FROM patrons
+JOIN holds 
+ON patrons.id = holds.patron_id
+JOIN books
+ON books.isbn = holds.isbn
+WHERE books.title = 'Advanced Potion-Making'
+ORDER BY rank ASC;
+
+RESULTS: 
+
+name	          rank	title
+Terry Boot	    1	    Advanced Potion-Making
+Cedric Diggory	2	    Advanced Potion-Making
+
+
+- List all of the library patrons. If they have one or more books checked out, list the books with the patrons.
+
+SELECT patrons.name, transactions.isbn, books.title
+FROM patrons 
+JOIN transactions 
+ON patrons.id = transactions.patron_id
+JOIN books
+ON transactions.isbn = books.isbn
+WHERE transactions.checked_in_date is not NULL;
+
+RESULTS:
+
+name	            isbn	      title
+Hermione Granger	1840918626	Hogwarts: A History
+Cho Chang	        9136884926	Advanced Potion-Making
+Terry Boot	      3458400871	Fantastic Beasts and Where to Find Them
+Padma Patil	      3458400871	Fantastic Beasts and Where to Find Them
+Hermione Granger	3458400871	Fantastic Beasts and Where to Find Them
